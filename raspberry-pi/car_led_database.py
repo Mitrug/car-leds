@@ -3,7 +3,7 @@ import atexit
 import logging
 
 LED_COUNT = 120
-DATABASE_PATH = '/home/pi/Desktop/car-led/car_led.db'
+DATABASE_PATH = '/home/pi/Desktop/car-leds/raspberry-pi/car_led.db'
 
 conn = sqlite3.connect(DATABASE_PATH)
 

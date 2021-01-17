@@ -63,7 +63,8 @@ if __name__ == '__main__':
     
     led_enabled = db_is_led_enabled()
     
-    reload_led_profile()  
+    if led_enabled == 'true':
+        reload_led_profile()
     
     try:
         while True:
