@@ -1,0 +1,19 @@
+[Unit]
+
+Description=Car LEDs - Bluetooth server listening to commands from Android phone
+
+After=multi-user.target
+
+
+
+[Service]
+
+Type=idle
+
+ExecStart=/usr/bin/python3 /home/pi/Desktop/car-leds/raspberry-pi/bluetooth_server.py
+
+
+
+[Install]
+
+WantedBy=multi-user.target

@@ -1,0 +1,19 @@
+[Unit]
+
+Description=Car LEDs - Script for setting the LED colours
+
+After=multi-user.target
+
+
+
+[Service]
+
+Type=idle
+
+ExecStart=/usr/bin/python3 /home/pi/Desktop/car-leds/raspberry-pi/car_led.py
+
+
+
+[Install]
+
+WantedBy=multi-user.target
