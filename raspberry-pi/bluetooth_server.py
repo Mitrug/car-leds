@@ -1,15 +1,12 @@
 from bluetooth import *
 import re
-from car_led_database import update_active_profile, get_profiles, get_current_active_profile_name, is_led_enabled, set_led_enabled
+from car_led_database import update_active_profile, get_active_profile, is_led_enabled, set_led_enabled
 import logging
 
 logging.basicConfig(level=logging.INFO)
 
 def is_activate_led_profile_command(command) -> bool:
     return re.search('active_led_profile: .+', command) != None
-
-def is_get_led_profiles(command) -> bool:
-    return re.search('get_profiles', command) != None
     
 def is_get_active_led_profile(command) -> bool:
     return re.search('get_active_profile', command) != None
@@ -28,12 +25,9 @@ def execute_comand_activate_led_profile(client_sock, command):
         client_sock.send("active_profile: " + profile_name + "\r\n");
     except ValueError:
         pass
-    
-def execute_command_get_led_profiles(client_sock):
-    client_sock.send("configured_profiles: " + ', '.join(get_profiles()) + "\r\n")
  
 def execute_command_get_active_led_profile(client_sock):
-    client_sock.send("active_profile: " + get_current_active_profile_name() + "\r\n")   
+    client_sock.send("active_profile: " + get_active_profile() + "\r\n")   
     
 def execute_command_is_led_enabled(client_sock):
     client_sock.send("led_enabled: " + is_led_enabled() + "\r\n")     
@@ -49,8 +43,6 @@ def route_command(client_sock, command):
     logging.info("Received command: \"" + command + "\"")
     if is_activate_led_profile_command(command):
         execute_comand_activate_led_profile(client_sock, command)
-    elif is_get_led_profiles(command):
-        execute_command_get_led_profiles(client_sock)
     elif is_get_active_led_profile(command):
         execute_command_get_active_led_profile(client_sock)  
     elif is_get_led_enabled(command):
